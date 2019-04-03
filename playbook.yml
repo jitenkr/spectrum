@@ -1,6 +1,7 @@
 ---
 - name: DevDeployment
   hosts: localhost
+  connection: local
   vars:
     dest_dir: D://DevOps//scripts_dest
   tasks:
