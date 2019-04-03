@@ -9,10 +9,14 @@
         - name: Set up destination dir
           file: path="{{ dest_dir }}" state=directory mode=0755
           register: log
+          delegate_to: 127.0.0.1
+
           
         - name: Set up working dir
           file: path=D://DevOps//scripts_dest//{{groupid}}//{{artefactid}}//{{version}} state=directory mode=0755
           register: log
+          delegate_to: 127.0.0.1
+
           
         - name: Get the artefact from Nexus
           get_url:
@@ -23,6 +27,8 @@
             validate_certs: no
             mode: 0755
           register: log
+          delegate_to: 127.0.0.1
+
           
         - name: untar artefact into destination
           unarchive:
@@ -32,3 +38,5 @@
             copy: no
             dest: "{{ dest_dir }}"
           register: log  
+          delegate_to: 127.0.0.1
+
