@@ -1,0 +1,33 @@
+---
+- name: DevDeployment
+  hosts: 192.168.27.1
+  vars:
+    dest_dir: D://DevOps//scripts_dest
+  tasks:
+    - block:
+        - name: Set up destination dir
+          file: path="{{ dest_dir }}" state=directory mode=0755
+          register: log
+          
+        - name: Set up working dir
+          file: path=D://DevOps//scripts_dest//{{groupid}}//{{artefactid}}//{{version}} state=directory mode=0755
+          register: log
+          
+        - name: Get the artefact from Nexus
+          get_url:
+            url: https://localhost:8084/nexus/service/local/artifact/maven/redirect?g={{groupid}}&a={{artefactid}}&v={{version}}&r=snapshots&p=tar.gz
+            url_username: "admin"
+            url_password: "admin123"
+            dest: D://DevOps//scripts_dest//{{groupid}}//{{artefactid}}//{{version}}//download.tar.gz
+            validate_certs: no
+            mode: 0755
+          register: log
+          
+        - name: untar artefact into destination
+          unarchive:
+      #      extra_opts: ['--strip-components=1','--show-stored-names']
+            src: D://DevOps//scripts_dest//{{groupid}}//{{artefactid}}//{{version}}//download.tar.gz
+            remote_src: no
+            copy: no
+            dest: "{{ dest_dir }}"
+          register: log  
