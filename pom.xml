@@ -35,13 +35,13 @@
         <repository>
             <id>dsnexus</id>
             <name></name>
-            <url>http://localhost:8084/repository/spectrum-df-repo/
+            <url>http://localhost:8084/repository/DataFlowRepo/
             </url>
         </repository>
         <snapshotRepository>
             <id>dsnexus-snapshots</id>
             <name></name>
-            <url>http://localhost:8084/repository/spectrum-df-repo/
+            <url>http://localhost:8084/repository/DataFlowRepo/
             </url>
         </snapshotRepository>
     </distributionManagement>
